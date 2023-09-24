@@ -1,2 +1,9 @@
-package Commands;public class Membership {
+package Commands;
+
+public class Membership
+{
+    public Membership()
+    {
+
+    }
 }

@@ -1,4 +1,4 @@
-package Commands;
+package Commands.User;
 
 public interface CustomerDetails
 {

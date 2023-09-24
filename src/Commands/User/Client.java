@@ -1,16 +1,18 @@
-package Commands;
+package Commands.User;
 
-public class Client implements CustomerDetails{
+import Commands.Register;
+
+public class Client implements CustomerDetails {
     private String name;
     private int ID = 1000;
     private boolean orderStatus;
     private String membershipType;
-    private Register register;
+    private static Register register = new Register();
     public Client(String name, String membershipType)
     {
         this.name = name;
         this.ID = ID++;
-        this.orderStatus = true; // call checkoutitems.java
+        this.orderStatus = register.isOrderDone(true);
         this.membershipType = membershipType;
     }
     @Override
@@ -60,5 +62,13 @@ public class Client implements CustomerDetails{
 
     public void setMembershipType(String membershipType) {
         this.membershipType = membershipType;
+    }
+
+    public boolean isOrderStatus() {
+        return orderStatus;
+    }
+
+    public void setOrderStatus(boolean orderStatus) {
+        this.orderStatus = orderStatus;
     }
 }

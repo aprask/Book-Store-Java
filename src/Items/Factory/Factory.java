@@ -1,6 +1,6 @@
-package Factory;
+package Items.Factory;
 import Items.*;
-import java.util.Scanner;
+
 public class Factory
 {
     public Item item(String type)

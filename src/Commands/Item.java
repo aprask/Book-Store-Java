@@ -1,2 +1,6 @@
-package Commands;public enum Item {
+package Commands;
+
+public enum Item
+{
+    BOOK,CD,DVD;
 }

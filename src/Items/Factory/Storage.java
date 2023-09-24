@@ -1,4 +1,4 @@
-package Factory;
+package Items.Factory;
 import java.util.*;
 import Items.Item;
 
@@ -19,5 +19,6 @@ public class Storage
         else {
             System.out.println("Error");
         }
+
     }
 }
