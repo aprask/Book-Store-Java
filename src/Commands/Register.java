@@ -1,22 +1,16 @@
 package Commands;
+import Commands.Items.Inventory;
 import Commands.User.Client;
-import Items.Factory.*;
+
+import java.util.Arrays;
 
 public class Register implements Customer {
-    private static Storage storage = new Storage();
+    protected static Inventory Inventory;
     private float orderTotal;
     private static int orderID = 1;
     private static Customer customer;
     private static Client client;
     private EnterStore enterStore;
-    public static Storage getStorage() {
-        return storage;
-    }
-
-    public static void setStorage(Storage storage) {
-        Register.storage = storage;
-    }
-
     @Override
     public void enterStore(Customer customer, Client client) {
         new EnterStore(customer, client);
@@ -44,7 +38,7 @@ public class Register implements Customer {
 
     public void createItems()
     {
-        storage.createStoreItems();
+        // TODO: display menu items
     }
 
     public void fixOrderID()

@@ -1,26 +1,38 @@
 package Items.Factory;
 import Items.*;
+import java.util.*;
 
 public class Factory
 {
-    public Item item(String type)
+    static Scanner scan = new Scanner(System.in);
+    private CD cd = new CD();
+    public void item(String type)
     {
-        Item userItem = null;
         if(type.equalsIgnoreCase("cd"))
         {
-            return new CD();
+            System.out.println("Enter the name of the CD: ");
+            String cdName = scan.next();
+            System.out.println("How much does " + cdName + " cost? ");
+            float cdCost = scan.nextFloat();
+            System.out.println("How many seconds does " + cdName + " contain? ");
+            float cdLength = scan.nextFloat();
+            cd.addCD(cdName,cdCost,cdLength);
         }
         else if(type.equalsIgnoreCase("book"))
         {
-            return new Book();
+            new Book();
         }
         else if(type.equalsIgnoreCase("dvd"))
         {
-            return new DVD();
+            new DVD();
         }
-        else
-        {
-            return null;
-        }
+    }
+
+    public CD getCd() {
+        return cd;
+    }
+
+    public void setCd(CD cd) {
+        this.cd = cd;
     }
 }

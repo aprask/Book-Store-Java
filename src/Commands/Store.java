@@ -5,29 +5,13 @@ import java.util.*;
 public class Store
 {
     private Item itemMenu;
-    private Register register = new Register();
+    private final Register register = new Register();
     private Scanner scan = new Scanner(System.in);
     public void greetingMessage()
     {
         System.out.println("Welcome to the store!");
-        System.out.println("In order to open, we need to create items \n");
-        while(true)
-        {
-            this.register.createItems();
-            System.out.println("Would you like to add more items? yes or no ");
-            String userContinue = scan.next();
-            if(userContinue.equalsIgnoreCase("yes"))
-            {
-                continue;
-            }
-            else
-            {
-
-                break;
-            }
+        this.register.createItems();
         }
-
-    }
     public void menuDisplay()
     {
         switch (itemMenu) {
