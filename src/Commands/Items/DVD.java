@@ -4,10 +4,12 @@ public class DVD {
     private String itemName;
     private double itemPrice;
     private double dvdLength;
-    public DVD(String itemName, double itemPrice, double dvdLength) {
+    private int ID;
+    public DVD(String itemName, double itemPrice, double dvdLength, int ID) {
         this.itemName = itemName;
         this.itemPrice = itemPrice;
         this.dvdLength = dvdLength;
+        this.ID = ID;
     }
 
     public String getItemName() {
@@ -36,5 +38,13 @@ public class DVD {
     @Override
     public String toString() {
         return "Name: " + getItemName() + "\nPrice: " + getItemPrice() + "\nDVD Length: " + getDvdLength();
+    }
+
+    public int getID() {
+        return ID;
+    }
+
+    public void setID(int ID) {
+        this.ID = ID;
     }
 }

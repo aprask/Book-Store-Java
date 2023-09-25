@@ -4,10 +4,12 @@ public class CD {
     private String itemName;
     private double itemPrice;
     private double cdLength;
-    public CD(String itemName, double itemPrice, double cdLength) {
+    private int ID;
+    public CD(String itemName, double itemPrice, double cdLength, int ID) {
         this.itemName = itemName;
         this.itemPrice = itemPrice;
         this.cdLength = cdLength;
+        this.ID = ID;
     }
 
     public String getItemName() {
@@ -37,4 +39,12 @@ public class CD {
     public String toString() {
         return "Name: " + getItemName() + "\nPrice: " + getItemPrice() + "\nCD Length: " + getCdLength();
      }
+
+    public int getID() {
+        return ID;
+    }
+
+    public void setID(int ID) {
+        this.ID = ID;
+    }
 }

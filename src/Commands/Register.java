@@ -2,15 +2,15 @@ package Commands;
 import Commands.Items.Inventory;
 import Commands.User.Client;
 
-import java.util.Arrays;
+import java.util.*;
 
 public class Register implements Customer {
-    protected static Inventory Inventory;
     private float orderTotal;
     private static int orderID = 1;
     private static Customer customer;
     private static Client client;
     private EnterStore enterStore;
+    static Scanner scan = new Scanner(System.in);
     @Override
     public void enterStore(Customer customer, Client client) {
         new EnterStore(customer, client);
@@ -36,9 +36,18 @@ public class Register implements Customer {
         fixOrderID();
     }
 
-    public void createItems()
+    public int createItems()
     {
-        // TODO: display menu items
+        System.out.println();
+        Inventory inventory = new Inventory();
+        inventory.availableBooks();
+        inventory.availableCDs();
+        inventory.availableDVDs();
+        System.out.println("Type \"1\" to purchase a Book");
+        System.out.println("Type \"2\" to purchase a CD");
+        System.out.println("Type \"3\" to purchase a DVD");
+        return scan.nextInt();
+
     }
 
     public void fixOrderID()

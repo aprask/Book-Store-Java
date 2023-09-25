@@ -4,10 +4,12 @@ public class Book {
     private String itemName;
     private double itemPrice;
     private int pages;
-    public Book(String itemName, double itemPrice, int pages) {
+    private int ID;
+    public Book(String itemName, double itemPrice, int pages, int ID) {
         this.itemName = itemName;
         this.itemPrice = itemPrice;
         this.pages = pages;
+        this.ID = ID;
     }
 
     public String getItemName() {
@@ -36,5 +38,13 @@ public class Book {
     @Override
     public String toString() {
         return "Name: " + getItemName() + "\nPrice: " + getItemPrice() + "\nPage Count: " + getPages();
+    }
+
+    public int getID() {
+        return ID;
+    }
+
+    public void setID(int ID) {
+        this.ID = ID;
     }
 }
