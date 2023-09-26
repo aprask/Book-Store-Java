@@ -5,8 +5,9 @@ import Commands.User.Client;
 import java.util.*;
 
 public class Register implements Customer {
-    private float orderTotal;
+    private double orderTotal;
     private static int orderID = 1;
+    private int selectionID;
     private static Customer customer;
     private static Client client;
     private EnterStore enterStore;
@@ -19,12 +20,13 @@ public class Register implements Customer {
     @Override
     public void checkOut() {
         isOrderDone(true);
-        System.out.println("Order Total: " + orderTotal);
+        System.out.println("Order Total: " + "$" + orderTotal);
     }
 
     @Override
     public void refundOrder() {
-        System.out.println("Order " + orderID + " + is refunded");
+        System.out.println("Your order has been refunded");
+        System.out.println("Your $" + getOrderTotal() + " has been returned to your balance"); //TODO: ADD PAYMENT METHOD
     }
 
     @Override
@@ -35,11 +37,14 @@ public class Register implements Customer {
     public void generateOrder() {
         fixOrderID();
     }
-
-    public int createItems()
+    public void addToTotal(double val)
     {
+        orderTotal += val;
+        this.setOrderTotal(orderTotal);
+    }
+
+    public int createItems(Inventory inventory) {
         System.out.println();
-        Inventory inventory = new Inventory();
         inventory.availableBooks();
         inventory.availableCDs();
         inventory.availableDVDs();
@@ -47,12 +52,11 @@ public class Register implements Customer {
         System.out.println("Type \"2\" to purchase a CD");
         System.out.println("Type \"3\" to purchase a DVD");
         return scan.nextInt();
-
     }
+
 
     public void fixOrderID()
     {
-        System.out.println("Order: " + orderID + " has been created");
         orderID++;
     }
 
@@ -61,11 +65,19 @@ public class Register implements Customer {
         return status;
     }
 
-    public float getOrderTotal() {
+    public double getOrderTotal() {
         return orderTotal;
     }
 
-    public void setOrderTotal(float orderTotal) {
+    public void setOrderTotal(double orderTotal) {
         this.orderTotal = orderTotal;
+    }
+
+    public int getSelectionID() {
+        return selectionID;
+    }
+
+    public void setSelectionID(int selectionID) {
+        this.selectionID = selectionID;
     }
 }
