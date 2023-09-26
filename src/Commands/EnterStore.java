@@ -1,6 +1,5 @@
 package Commands;
 
-import Commands.Command;
 import Commands.User.Client;
 
 import java.util.ArrayList;
@@ -16,6 +15,13 @@ public class EnterStore implements Command {
     @Override
     public void execute() {
         System.out.println("Party Total: " + this.clients.size());
+    }
+    public String additionalExecute()
+    {
+        for (Client value : clients) {
+            return value.getName();
+        }
+        return null;
     }
 
     public Client getClient() {

@@ -1,5 +1,6 @@
 package Commands;
 import Commands.Items.Inventory;
+import Commands.User.Client;
 
 import java.util.*;
 public class Store
@@ -8,7 +9,6 @@ public class Store
     private final Register register = new Register();
     private Scanner scan = new Scanner(System.in);
     private static int var;
-
     public static int getVar() {
         return var;
     }
@@ -99,13 +99,4 @@ public class Store
     public void setScan(Scanner scan) {
         this.scan = scan;
     }
-
-    public void listPartyMembers()
-    {
-
-    }
 }
-
-/*
-
- */

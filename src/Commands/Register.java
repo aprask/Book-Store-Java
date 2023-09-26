@@ -9,13 +9,15 @@ public class Register implements Customer {
     private double orderTotal;
     private static int orderID = 1;
     private int selectionID;
+    EnterStore enterStore;
     private static Customer customer;
     private static Client client = new Client();
-    private EnterStore enterStore;
     static Scanner scan = new Scanner(System.in);
     @Override
     public void enterStore(Client client) {
         new EnterStore(client);
+        System.out.println("Party Members: ");
+
     }
     public void partyTotal(int partyTotal)
     {
@@ -29,16 +31,16 @@ public class Register implements Customer {
             String customerPayment = scan.next();
             System.out.println("Does this customer want a premium membership? \"Yes\" or \"No\"?");
             String premiumOrNot = scan.next();
+            Upgrade upgrade = new Upgrade(client,customerName,customerPayment);
             if(premiumOrNot.equalsIgnoreCase("yes"))
             {
-                Upgrade upgrade = new Upgrade(client);
                 upgrade.execute();
             }
             else
             {
-                System.out.println("No worries, you will not be charged with the standard version");
-                System.out.println("However, you will lose benefits");
+                upgrade.doNotExecute();
             }
+            upgrade.displayCustomers();
             i++;
         }
     }
