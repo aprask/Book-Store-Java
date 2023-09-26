@@ -4,16 +4,18 @@ import Commands.Register;
 
 public class Client implements CustomerDetails {
     private String name;
-    private int ID = 1000;
+    private static int ID = 1000;
     private boolean orderStatus;
-    private String membershipType;
-    private static Register register = new Register();
-    public Client(String name, String membershipType)
+    private boolean premiumMember;
+    private String paymentType;
+    private static final Register register = new Register();
+    public Client(String name, boolean membershipType, String paymentType)
     {
         this.name = name;
-        this.ID = ID++;
+        ID = ID++;
         this.orderStatus = register.isOrderDone(true);
-        this.membershipType = membershipType;
+        this.premiumMember = membershipType;
+        this.paymentType = paymentType;
     }
     @Override
     public String returnName() {
@@ -45,7 +47,7 @@ public class Client implements CustomerDetails {
     }
 
     public void setID(int ID) {
-        this.ID = ID;
+        Client.ID = ID;
     }
 
     public String getName() {
@@ -55,20 +57,45 @@ public class Client implements CustomerDetails {
     public void setName(String name) {
         this.name = name;
     }
-
-    public String getMembershipType() {
-        return membershipType;
+    public String displayMembershipDetails()
+    {
+        if(premiumMember)
+        {
+            return "Member Type: Premium";
+        }
+        else
+        {
+            return "Member Type: Standard";
+        }
     }
-
-    public void setMembershipType(String membershipType) {
-        this.membershipType = membershipType;
+    public void identifyUser()
+    {
+        System.out.println("Name: " + getName());
+        System.out.println("Payment Type: " + getPaymentType());
+        System.out.println("Membership Type: " + displayMembershipDetails());
+        System.out.println("User ID Number: " + getID());
     }
-
     public boolean isOrderStatus() {
         return orderStatus;
     }
 
     public void setOrderStatus(boolean orderStatus) {
         this.orderStatus = orderStatus;
+    }
+
+    public String getPaymentType() {
+        return paymentType;
+    }
+
+    public void setPaymentType(String paymentType) {
+        this.paymentType = paymentType;
+    }
+
+    public boolean isPremiumMember() {
+        return premiumMember;
+    }
+
+    public void setPremiumMember(boolean premiumMember) {
+        this.premiumMember = premiumMember;
     }
 }

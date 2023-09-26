@@ -1,9 +1,17 @@
 package Commands.User;
 
-public class Membership
-{
-    public Membership()
-    {
+import Commands.Command;
 
+public class Membership implements Command
+{
+    Client client;
+    public Membership(Client newUser)
+    {
+        this.client = newUser;
+    }
+
+    @Override
+    public void execute() {
+        this.client.displayMembershipDetails();
     }
 }

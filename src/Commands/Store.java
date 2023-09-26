@@ -48,7 +48,7 @@ public class Store
                 int selectedID = scan.nextInt();
                 if(selectedID < 5 && selectedID > 0)
                 {
-                    this.register.addToTotal(this.inventory.getBookPrice(selectedID)); // This is using getBookPrice
+                    this.register.addToTotal(this.inventory.getBookPrice(selectedID));
                     this.inventory.removeBook(selectedID);
                 }
             }
@@ -68,7 +68,7 @@ public class Store
                 int selectedID = scan.nextInt();
                 if(selectedID < 5 && selectedID > 0)
                 {
-                    this.register.addToTotal(this.inventory.getDVDPrice(selectedID)); // Use getDVDPrice, not getBookPrice
+                    this.register.addToTotal(this.inventory.getDVDPrice(selectedID));
                     this.inventory.removeDVD(selectedID);
                 }
             }
