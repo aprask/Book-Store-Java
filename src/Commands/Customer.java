@@ -4,7 +4,7 @@ import Commands.User.Client;
 
 public interface Customer
 {
-    public void enterStore(Customer customer, Client client);
+    public void enterStore(Client client);
     public void checkOut();
     public void refundOrder();
     public boolean purchasePremiumMembership(boolean purchase);

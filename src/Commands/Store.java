@@ -20,6 +20,9 @@ public class Store
     public void greetingMessage()
     {
         System.out.println("Welcome to the store!");
+        System.out.println("How many members are in your party? ");
+        int partyTotal = scan.nextInt();
+        this.register.partyTotal(partyTotal);
         System.out.println("Would you like a CD, DVD, or a Book? ");
         var = this.register.createItems(this.inventory);
         this.inventory.setSelectionID(var);
@@ -96,4 +99,13 @@ public class Store
     public void setScan(Scanner scan) {
         this.scan = scan;
     }
+
+    public void listPartyMembers()
+    {
+
+    }
 }
+
+/*
+
+ */

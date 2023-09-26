@@ -1,6 +1,7 @@
 package Commands;
 import Commands.Items.Inventory;
 import Commands.User.Client;
+import Commands.User.Upgrade;
 
 import java.util.*;
 
@@ -9,14 +10,38 @@ public class Register implements Customer {
     private static int orderID = 1;
     private int selectionID;
     private static Customer customer;
-    private static Client client;
+    private static Client client = new Client();
     private EnterStore enterStore;
     static Scanner scan = new Scanner(System.in);
     @Override
-    public void enterStore(Customer customer, Client client) {
-        new EnterStore(customer, client);
+    public void enterStore(Client client) {
+        new EnterStore(client);
     }
-
+    public void partyTotal(int partyTotal)
+    {
+        int i = 0;
+        while(i < partyTotal)
+        {
+            int customerNumber = i+1;
+            System.out.println("Customer " + customerNumber + "'s name? ");
+            String customerName = scan.next();
+            System.out.println("Customer " + customerNumber + "'s payment type? ");
+            String customerPayment = scan.next();
+            System.out.println("Does this customer want a premium membership? \"Yes\" or \"No\"?");
+            String premiumOrNot = scan.next();
+            if(premiumOrNot.equalsIgnoreCase("yes"))
+            {
+                Upgrade upgrade = new Upgrade(client);
+                upgrade.execute();
+            }
+            else
+            {
+                System.out.println("No worries, you will not be charged with the standard version");
+                System.out.println("However, you will lose benefits");
+            }
+            i++;
+        }
+    }
     @Override
     public void checkOut() {
         isOrderDone(true);
@@ -26,7 +51,7 @@ public class Register implements Customer {
     @Override
     public void refundOrder() {
         System.out.println("Your order has been refunded");
-        System.out.println("Your $" + getOrderTotal() + " has been returned to your balance"); //TODO: ADD PAYMENT METHOD
+        System.out.println("Your $" + getOrderTotal() + " has been returned to your payment method");
     }
 
     @Override
@@ -48,7 +73,7 @@ public class Register implements Customer {
         inventory.availableBooks();
         inventory.availableCDs();
         inventory.availableDVDs();
-        System.out.println("Type \"1\" to purchase a Book");
+        System.out.println("\nType \"1\" to purchase a Book");
         System.out.println("Type \"2\" to purchase a CD");
         System.out.println("Type \"3\" to purchase a DVD");
         return scan.nextInt();

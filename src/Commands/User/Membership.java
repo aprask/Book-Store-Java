@@ -13,5 +13,7 @@ public class Membership implements Command
     @Override
     public void execute() {
         this.client.displayMembershipDetails();
+        this.client.membershipDueDate();
     }
+
 }

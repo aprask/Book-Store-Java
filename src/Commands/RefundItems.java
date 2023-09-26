@@ -1,5 +1,7 @@
 package Commands;
 
+import Commands.Items.Inventory;
+
 public class RefundItems implements Command {
     Register register;
     public RefundItems(Register newOrder)

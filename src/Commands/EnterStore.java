@@ -1,22 +1,21 @@
 package Commands;
 
+import Commands.Command;
 import Commands.User.Client;
 
 import java.util.ArrayList;
 
 public class EnterStore implements Command {
-    Customer customer;
     private Client client;
-    private ArrayList<Client> clients = new ArrayList<>();
-    public EnterStore(Customer customer, Client client)
+    public ArrayList<Client> clients = new ArrayList<>();
+    public EnterStore(Client client)
     {
-        this.customer = customer;
         this.client = client;
         clients.add(client);
     }
     @Override
     public void execute() {
-
+        System.out.println("Party Total: " + this.clients.size());
     }
 
     public Client getClient() {
