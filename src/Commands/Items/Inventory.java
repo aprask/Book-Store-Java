@@ -112,6 +112,7 @@ public class Inventory {
     }
     public void availableBooks()
     {
+        System.out.println("******************************************************************");
         System.out.println("Available Books: ");
         for (Book book : books) {
             if (book != null) {
@@ -121,9 +122,12 @@ public class Inventory {
                 System.out.println("Pages: " + book.getPages());
             }
         }
+        System.out.println("******************************************************************");
+        System.out.println();
     }
     public void availableCDs()
     {
+        System.out.println("******************************************************************");
         System.out.println("Available CDs: ");
         for (CD cd : cds) {
             if (cd != null) {
@@ -133,9 +137,12 @@ public class Inventory {
                 System.out.println("Length in seconds: " + cd.getCdLength());
             }
         }
+        System.out.println("******************************************************************");
+        System.out.println();
     }
     public void availableDVDs()
     {
+        System.out.println("******************************************************************");
         System.out.println("Available DVDs: ");
         for (DVD dvd : dvds) {
             if (dvd != null) {
@@ -145,6 +152,8 @@ public class Inventory {
                 System.out.println("Length in seconds: " + dvd.getDvdLength());
             }
         }
+        System.out.println("******************************************************************");
+        System.out.println();
     }
     @Override
     public String toString() {

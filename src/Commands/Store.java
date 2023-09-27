@@ -23,12 +23,15 @@ public class Store
         System.out.println("How many members are in your party? ");
         int partyTotal = scan.nextInt();
         this.register.partyTotal(partyTotal);
+        handleUser();
+        // TODO Handle user specific purchases
+
         System.out.println("Would you like a CD, DVD, or a Book? ");
         var = this.register.createItems(this.inventory);
         this.inventory.setSelectionID(var);
         while(true)
         {
-            menuDisplay();
+            menu();
             if(scan.hasNextLine())
             {
                 System.out.println("Order Total: " + this.register.getOrderTotal());
@@ -42,7 +45,7 @@ public class Store
             }
         }
     }
-    public void menuDisplay()
+    public void menu()
     {
         switch (this.inventory.getSelectionID()) {
             case 1 -> {
@@ -78,7 +81,7 @@ public class Store
             default -> System.out.println("Error");
         }
     }
-    private void handleCheckout() {
+    public void handleCheckout() {
         System.out.println("Would you like a refund? Type \"yes\" or \"no\"");
         String refundOption = scan.next();
         if (refundOption.equalsIgnoreCase("yes")) {
@@ -90,6 +93,11 @@ public class Store
             CheckOutItems checkOut = new CheckOutItems(register);
             checkOut.execute();
         }
+    }
+    public void handleUser() // TODO FINISH
+    {
+        System.out.println("Who will be making this purchase? ");
+        String userPurchaseName = scan.next();
     }
 
     public Scanner getScan() {

@@ -7,42 +7,13 @@ import java.util.*;
 
 public class Register implements Customer {
     private double orderTotal;
-    private static int orderID = 1;
     private int selectionID;
-    EnterStore enterStore;
-    private static Customer customer;
-    private static Client client = new Client();
+    EnterStore enter;
+    private int partyTotal;
     static Scanner scan = new Scanner(System.in);
     @Override
     public void enterStore(Client client) {
-        new EnterStore(client);
-        System.out.println("Party Members: ");
-
-    }
-    public void partyTotal(int partyTotal)
-    {
-        int i = 0;
-        while(i < partyTotal)
-        {
-            int customerNumber = i+1;
-            System.out.println("Customer " + customerNumber + "'s name? ");
-            String customerName = scan.next();
-            System.out.println("Customer " + customerNumber + "'s payment type? ");
-            String customerPayment = scan.next();
-            System.out.println("Does this customer want a premium membership? \"Yes\" or \"No\"?");
-            String premiumOrNot = scan.next();
-            Upgrade upgrade = new Upgrade(client,customerName,customerPayment);
-            if(premiumOrNot.equalsIgnoreCase("yes"))
-            {
-                upgrade.execute();
-            }
-            else
-            {
-                upgrade.doNotExecute();
-            }
-            upgrade.displayCustomers();
-            i++;
-        }
+        this.enter = new EnterStore(client);
     }
     @Override
     public void checkOut() {
@@ -55,14 +26,9 @@ public class Register implements Customer {
         System.out.println("Your order has been refunded");
         System.out.println("Your $" + getOrderTotal() + " has been returned to your payment method");
     }
-
     @Override
-    public boolean purchasePremiumMembership(boolean purchase) {
-        return purchase;
-    }
-    @Override
-    public void generateOrder() {
-        fixOrderID();
+    public boolean isOrderDone(boolean status) {
+        return status;
     }
     public void addToTotal(double val)
     {
@@ -80,18 +46,33 @@ public class Register implements Customer {
         System.out.println("Type \"3\" to purchase a DVD");
         return scan.nextInt();
     }
-
-
-    public void fixOrderID()
+    public void partyTotal(int partyTotal) {
+        this.partyTotal = partyTotal;
+        int i = 0;
+        while (i < partyTotal) {
+            int customerNumber = i + 1;
+            System.out.println("Customer " + customerNumber + "'s name? ");
+            String customerName = scan.next();
+            System.out.println("Customer " + customerNumber + "'s payment type? ");
+            String customerPayment = scan.next();
+            System.out.println("Does this customer want a premium membership? \"Yes\" or \"No\"?");
+            String premiumOrNot = scan.next();
+            Client customerClient = new Client(customerName, premiumOrNot.equalsIgnoreCase("yes"), customerPayment);
+            Upgrade upgrade = new Upgrade(customerClient, customerPayment, customerName);
+            if (premiumOrNot.equalsIgnoreCase("yes")) {
+                upgrade.execute();
+            } else {
+                upgrade.doNotExecute();
+            }
+            this.enterStore(customerClient);
+            upgrade.displayCustomers();
+            i++;
+        }
+    }
+    public void handleOrder(Client client)
     {
-        orderID++;
-    }
 
-    @Override
-    public boolean isOrderDone(boolean status) {
-        return status;
     }
-
     public double getOrderTotal() {
         return orderTotal;
     }
@@ -106,5 +87,13 @@ public class Register implements Customer {
 
     public void setSelectionID(int selectionID) {
         this.selectionID = selectionID;
+    }
+
+    public int getPartyTotal() {
+        return partyTotal;
+    }
+
+    public void setPartyTotal(int partyTotal) {
+        this.partyTotal = partyTotal;
     }
 }

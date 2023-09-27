@@ -24,7 +24,7 @@ public class Client implements CustomerDetails {
     }
     @Override
     public String returnName() {
-        return null;
+        return this.name;
     }
 
     @Override
@@ -56,7 +56,7 @@ public class Client implements CustomerDetails {
     }
 
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public void setName(String name) {
