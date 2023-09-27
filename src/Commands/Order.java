@@ -9,11 +9,5 @@ public class Order implements Command
     @Override
     public void execute() {
 
-        /*
-        for(int i = 0; i < this.register.getPartyTotal(); i++)
-        {
-            if
-        }
-         */
     }
 }

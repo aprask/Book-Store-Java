@@ -25,6 +25,26 @@ public class EnterStore implements Command {
         }
         return customerNames;
     }
+    public boolean whoPurchased(String name)
+    {
+        for(int i = 0; i < this.getClients().size(); i++)
+        {
+            if(client.getName().equalsIgnoreCase(name))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+    public boolean purchaseItem(int ID)
+    {
+        for (Client value : clients) {
+            if (value.getID() == ID) {
+                return true;
+            }
+        }
+        return false;
+    }
     public Client getClient() {
         return client;
     }

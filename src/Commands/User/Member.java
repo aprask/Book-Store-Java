@@ -10,11 +10,11 @@ public class Member implements Command
     public Member(String name, boolean premium, String payment)
     {
         this.client = new Client(name,premium,payment);
-        this.enterStore.clients.add(client);
+        EnterStore.clients.add(client);
     }
     @Override
     public void execute() {
         System.out.println(this.client.getName() + " has been added to the party");
-        System.out.println("The party total is at: " + this.enterStore.clients.size());
+        System.out.println("The party total is at: " + EnterStore.clients.size());
     }
 }

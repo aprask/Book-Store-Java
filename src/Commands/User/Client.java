@@ -4,7 +4,7 @@ import Commands.Register;
 import java.util.*;
 public class Client implements CustomerDetails {
     private String name;
-    private static int ID = 1000;
+    private static int ID = 0;
     private boolean orderStatus;
     private boolean premiumMember;
     static Scanner scan = new Scanner(System.in);
@@ -50,7 +50,6 @@ public class Client implements CustomerDetails {
     public int getID() {
         return ID;
     }
-
     public void setID(int ID) {
         Client.ID = ID;
     }
@@ -110,18 +109,18 @@ public class Client implements CustomerDetails {
         int membershipMonth = scan.nextInt();
         final float premiumPayment = 7.55f;
         switch (membershipMonth) {
-            case 1 -> System.out.println("Your membership payment of " + premiumPayment + " will be due in February");
-            case 2 -> System.out.println("Your membership payment of " + premiumPayment + " will be due in March");
-            case 3 -> System.out.println("Your membership payment of " + premiumPayment + " will be due in April");
-            case 4 -> System.out.println("Your membership payment of " + premiumPayment + " will be due in May");
-            case 5 -> System.out.println("Your membership payment of " + premiumPayment + " will be due in June");
-            case 6 -> System.out.println("Your membership payment of " + premiumPayment + " will be due in July");
-            case 7 -> System.out.println("Your membership payment of " + premiumPayment + " will be due in August");
-            case 8 -> System.out.println("Your membership payment of " + premiumPayment + " will be due in September");
-            case 9 -> System.out.println("Your membership payment of " + premiumPayment + " will be due in October");
-            case 10 -> System.out.println("Your membership payment of " + premiumPayment + " will be due in November");
-            case 11 -> System.out.println("Your membership payment of " + premiumPayment + " will be due in December");
-            case 12 -> System.out.println("Your membership payment of " + premiumPayment + " will be due in January");
+            case 1 -> System.out.println("Your membership payment of $" + premiumPayment + " will be due in February");
+            case 2 -> System.out.println("Your membership payment of $" + premiumPayment + " will be due in March");
+            case 3 -> System.out.println("Your membership payment of $" + premiumPayment + " will be due in April");
+            case 4 -> System.out.println("Your membership payment of $" + premiumPayment + " will be due in May");
+            case 5 -> System.out.println("Your membership payment of $" + premiumPayment + " will be due in June");
+            case 6 -> System.out.println("Your membership payment of $" + premiumPayment + " will be due in July");
+            case 7 -> System.out.println("Your membership payment of $" + premiumPayment + " will be due in August");
+            case 8 -> System.out.println("Your membership payment of $" + premiumPayment + " will be due in September");
+            case 9 -> System.out.println("Your membership payment of $" + premiumPayment + " will be due in October");
+            case 10 -> System.out.println("Your membership payment of $" + premiumPayment + " will be due in November");
+            case 11 -> System.out.println("Your membership payment of $" + premiumPayment + " will be due in December");
+            case 12 -> System.out.println("Your membership payment of $" + premiumPayment + " will be due in January");
             default -> System.out.println("Error");
         }
     }

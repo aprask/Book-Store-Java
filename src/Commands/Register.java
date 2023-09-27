@@ -1,5 +1,6 @@
 package Commands;
 import Commands.Items.Inventory;
+import Commands.User.Bank;
 import Commands.User.Client;
 import Commands.User.Upgrade;
 
@@ -7,7 +8,6 @@ import java.util.*;
 
 public class Register implements Customer {
     private double orderTotal;
-    private int selectionID;
     EnterStore enter;
     private int partyTotal;
     static Scanner scan = new Scanner(System.in);
@@ -35,6 +35,15 @@ public class Register implements Customer {
         orderTotal += val;
         this.setOrderTotal(orderTotal);
     }
+    public boolean proceedWithOrder()
+    {
+        return true;
+    }
+    public void handleBankInteraction(double payment,Client client)
+    {
+        Bank bank = new Bank(enter,client);
+        bank.deductFromBank(payment);
+    }
 
     public int createItems(Inventory inventory) {
         System.out.println();
@@ -52,7 +61,7 @@ public class Register implements Customer {
         while (i < partyTotal) {
             int customerNumber = i + 1;
             System.out.println("Customer " + customerNumber + "'s name? ");
-            String customerName = scan.next();
+            String customerName = scan.next().toLowerCase();
             System.out.println("Customer " + customerNumber + "'s payment type? ");
             String customerPayment = scan.next();
             System.out.println("Does this customer want a premium membership? \"Yes\" or \"No\"?");
@@ -69,9 +78,9 @@ public class Register implements Customer {
             i++;
         }
     }
-    public void handleOrder(Client client)
+    public boolean handleOrder(String name)
     {
-
+        return this.enter.whoPurchased(name);
     }
     public double getOrderTotal() {
         return orderTotal;
@@ -81,19 +90,7 @@ public class Register implements Customer {
         this.orderTotal = orderTotal;
     }
 
-    public int getSelectionID() {
-        return selectionID;
-    }
-
-    public void setSelectionID(int selectionID) {
-        this.selectionID = selectionID;
-    }
-
     public int getPartyTotal() {
         return partyTotal;
-    }
-
-    public void setPartyTotal(int partyTotal) {
-        this.partyTotal = partyTotal;
     }
 }
