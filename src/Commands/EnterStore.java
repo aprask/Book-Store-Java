@@ -1,7 +1,5 @@
 package Commands;
-
 import Commands.User.Client;
-
 import java.util.ArrayList;
 
 public class EnterStore implements Command {

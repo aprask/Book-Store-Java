@@ -7,10 +7,11 @@ import Commands.User.Upgrade;
 import java.util.*;
 
 public class Register implements Customer {
-    private double orderTotal;
+    private static double orderTotal;
     EnterStore enter;
-    private int partyTotal;
-    static Scanner scan = new Scanner(System.in);
+    private static final Queue<String> orderOfCustomers = new LinkedList<>();
+    private static int partyTotal;
+    Scanner scan = new Scanner(System.in);
     @Override
     public void enterStore(Client client) {
         this.enter = new EnterStore(client);
@@ -18,22 +19,21 @@ public class Register implements Customer {
     @Override
     public void checkOut() {
         isOrderDone(true);
-        System.out.println("Order Total: " + "$" + orderTotal);
+        System.out.println("Order Total: " + "$" + Register.orderTotal);
     }
 
     @Override
     public void refundOrder() {
         System.out.println("Your order has been refunded");
-        System.out.println("Your $" + getOrderTotal() + " has been returned to your payment method");
+        System.out.println("Your $" + Register.orderTotal + " has been returned to your payment method");
     }
     @Override
     public boolean isOrderDone(boolean status) {
         return status;
     }
-    public void addToTotal(double val)
+    public static void addToTotal(double val)
     {
-        orderTotal += val;
-        this.setOrderTotal(orderTotal);
+        Register.orderTotal += val;
     }
     public boolean proceedWithOrder()
     {
@@ -43,6 +43,8 @@ public class Register implements Customer {
     {
         Bank bank = new Bank(enter,client);
         bank.deductFromBank(payment);
+        addToTotal(payment);
+        System.out.println("Party Order Total: $" + Register.orderTotal);
     }
 
     public int createItems(Inventory inventory) {
@@ -56,12 +58,13 @@ public class Register implements Customer {
         return scan.nextInt();
     }
     public void partyTotal(int partyTotal) {
-        this.partyTotal = partyTotal;
+        Register.partyTotal = partyTotal;
         int i = 0;
         while (i < partyTotal) {
             int customerNumber = i + 1;
             System.out.println("Customer " + customerNumber + "'s name? ");
-            String customerName = scan.next().toLowerCase();
+            String customerName = scan.next();
+            orderOfCustomers.offer(customerName);
             System.out.println("Customer " + customerNumber + "'s payment type? ");
             String customerPayment = scan.next();
             System.out.println("Does this customer want a premium membership? \"Yes\" or \"No\"?");
@@ -78,16 +81,13 @@ public class Register implements Customer {
             i++;
         }
     }
+    public String handleCustomer(int ID)
+    {
+        return orderOfCustomers.poll();
+    }
     public boolean handleOrder(String name)
     {
         return this.enter.whoPurchased(name);
-    }
-    public double getOrderTotal() {
-        return orderTotal;
-    }
-
-    public void setOrderTotal(double orderTotal) {
-        this.orderTotal = orderTotal;
     }
 
     public int getPartyTotal() {

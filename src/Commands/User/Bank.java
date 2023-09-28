@@ -20,11 +20,6 @@ public class Bank
     {
         banks[client.getID()] = 1000;
     }
-    public double totalMoneySpent()
-    {
-        return this.register.getOrderTotal();
-    }
-
     @Override
     public String toString() {
         return
@@ -44,7 +39,7 @@ public class Bank
             else if(newBankTotal > 0)
             {
                 System.out.println("For Customer: " + userClient.getName());
-                System.out.println("New Total: $" + newBankTotal);
+                System.out.println("New Balance: $" + newBankTotal);
             }
             else {
                 System.out.println("Something was incorrect with your input");
