@@ -6,6 +6,7 @@ import java.util.*;
 public class Store
 {
     private final Inventory inventory = new Inventory();
+    static int trackOrderAmount = 1;
     private final Register register = new Register();
     private static final Scanner scan = new Scanner(System.in);
     private static int var;
@@ -75,6 +76,10 @@ public class Store
     {
         for(int i = 0; i < this.register.getPartyTotal(); i++)
         {
+            if(this.register.enter.getClient().getName() == null)
+            {
+                break;
+            }
             userBank(this.register.enter.getClient().getID());
         }
     }
@@ -91,8 +96,7 @@ public class Store
             System.out.println("Would you like a CD, DVD, or a Book? ");
             var = this.register.createItems(this.inventory);
             this.inventory.setSelectionID(var);
-            boolean continuePurchase = true;
-                while(continuePurchase)
+                while(true)
                 {
                     menu();
                     if(scan.hasNextLine())
@@ -102,7 +106,10 @@ public class Store
                         {
                             System.out.println("Or would you like to move on to the next customer in your party? or \"2\"");
                         }
-                        System.out.println("Or would you like to checkout? Type \"-1\"");
+                        if(trackOrderAmount == this.register.getPartyTotal())
+                        {
+                            System.out.println("Or would you like to checkout? Type \"-1\"");
+                        }
                         String cartChoice = scan.next();
                         if(cartChoice.equalsIgnoreCase("-1"))
                         {
@@ -111,17 +118,21 @@ public class Store
                             if (refundOption.equalsIgnoreCase("yes")) {
                                 RefundItems refundItems = new RefundItems(register);
                                 refundItems.execute();
+                                break;
                             }
                             else
                             {
                                 CheckOutItems checkOut = new CheckOutItems(register);
                                 checkOut.execute();
+                                break;
+                                // TODO: fix null's order
+                                // TODO: Catch possible bad cases
+                                // TODO: test all possibilities
                             }
-                            continuePurchase = false;
-                            // TODO: null's order
                         }
                         else if(cartChoice.equalsIgnoreCase("2"))
                         {
+                            trackOrderAmount++;
                             handleUser();
                         }
                         else if(cartChoice.equalsIgnoreCase("1"))
