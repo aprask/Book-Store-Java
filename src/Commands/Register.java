@@ -81,15 +81,14 @@ public class Register implements Customer {
             i++;
         }
     }
-    public String handleCustomer(int ID)
+    public String handleCustomer()
     {
-        return orderOfCustomers.poll();
+        if (orderOfCustomers.isEmpty()) {
+            return null;
+        } else {
+            return orderOfCustomers.poll();
+        }
     }
-    public boolean handleOrder(String name)
-    {
-        return this.enter.whoPurchased(name);
-    }
-
     public int getPartyTotal() {
         return partyTotal;
     }
