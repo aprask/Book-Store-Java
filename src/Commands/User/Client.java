@@ -14,16 +14,33 @@ public class Client {
     {
 
     }
+
+    /**
+     *
+     * @param name collect name
+     */
     public Client(String name)
     {
         this.name = name;
     }
+
+    /**
+     *
+     * @param name collect name
+     * @param membershipType collect membership type (prem or not)
+     */
     public Client(String name, boolean membershipType)
     {
         this.name = name;
         this.premiumMember = membershipType;
     }
 
+    /**
+     *
+     * @param name collect name
+     * @param membershipType collect membership type (prem or not)
+     * @param paymentType collect the payment type (any type they input, no restrictions)
+     */
     public Client(String name, boolean membershipType, String paymentType)
     {
         this.name = name;
@@ -32,16 +49,35 @@ public class Client {
         this.premiumMember = membershipType;
         this.paymentType = paymentType;
     }
+
+    /**
+     *
+     * @return return the client's ID
+     */
     public int getID() {
         return ID;
     }
+
+    /**
+     *
+     * @return return the client's name
+     */
     public String getName() {
         return this.name;
     }
 
+    /**
+     *
+     * @param name set the client's name
+     */
     public void setName(String name) {
         this.name = name;
     }
+
+    /**
+     *
+     * @return the membership type
+     */
     public String displayMembershipDetails()
     {
         if(premiumMember)
@@ -53,12 +89,27 @@ public class Client {
             return "Member Type: Standard";
         }
     }
+
+    /**
+     *
+     * @return return the payment type
+     */
     public String getPaymentType() {
         return paymentType;
     }
+
+    /**
+     *
+     * @param premiumMember calls whether the client is premium or not
+     */
     public void setPremiumMember(boolean premiumMember) {
         this.premiumMember = premiumMember;
     }
+
+    /**
+     *
+     * @param orderStatus tells the program if the order is done
+     */
     public void setOrderStatus(boolean orderStatus) {
         this.orderStatus = orderStatus;
     }

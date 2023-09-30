@@ -9,6 +9,11 @@ public class Bank
     public Client userClient;
     public EnterStore enterStore;
     protected final ArrayList<Integer> banks = new ArrayList<>();
+    /**
+     *
+     * @param enterStore calling an instance of EnterStore.java
+     * @param userClient calling an instance of Client.java
+     */
     public Bank(EnterStore enterStore, Client userClient)
     {
         while(banks.size() <= userClient.getID())

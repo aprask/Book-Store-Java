@@ -8,6 +8,11 @@ public class Register implements Customer {
     private static final Queue<String> orderOfCustomers = new LinkedList<>();
     private static int partyTotal;
     public Scanner scan = new Scanner(System.in);
+
+    /**
+     *
+     * @param client takes in an instance of the Client.java class
+     */
     @Override
     public void enterStore(Client client) {
         this.enter = new EnterStore(client);
@@ -21,7 +26,10 @@ public class Register implements Customer {
             System.out.println
                     ("$" + enter.getCustomerPayments().get(i)+ " for: " + EnterStore.customerNames.get(i));
         }
-        System.out.println("Party Order Total: " + "$" + Register.orderTotal);
+        if(partyTotal > 1)
+        {
+            System.out.println("Party Order Total: " + "$" + Register.orderTotal);
+        }
     }
 
     @Override
@@ -33,20 +41,45 @@ public class Register implements Customer {
             System.out.println
                     ("$" + enter.getCustomerPayments().get(i)+ " for: " + EnterStore.customerNames.get(i));
         }
-        System.out.println("Your party's $" + Register.orderTotal + " has been returned to each of your payment methods");
+        if(partyTotal > 1)
+        {
+            System.out.println("Your party's $" + Register.orderTotal + " has been returned to each of your payment methods");
+        }
     }
+
+    /**
+     *
+     * @param status calls for an order status
+     * @return return the order status
+     */
     @Override
     public boolean isOrderDone(boolean status) {
         return status;
     }
+
+    /**
+     *
+     * @param val adds a val (value) to the overall total amount spent by the party
+     */
     public static void addToTotal(double val)
     {
         Register.orderTotal += val;
     }
+
+    /**
+     *
+     * @return returns true to notify the code to advance
+     */
     public boolean proceedWithOrder()
     {
         return true;
     }
+
+    /**
+     *
+     * @param payment retrieve the payment amount
+     * @param client call and instance of the Client.java class
+     */
     public void handleBankInteraction(double payment,Client client)
     {
         Bank bank = new Bank(enter,client);
@@ -57,6 +90,11 @@ public class Register implements Customer {
         System.out.println("****************************************************************************");
     }
 
+    /**
+     *
+     * @param inventory call an instance of the Inventory.java class
+     * @return return the selected item based on (1,2,3)
+     */
     public int createItems(Inventory inventory) {
         System.out.println();
         inventory.availableBooks();
@@ -67,6 +105,11 @@ public class Register implements Customer {
         System.out.println("Type \"3\" to purchase a DVD");
         return scan.nextInt();
     }
+
+    /**
+     *
+     * @param partyTotal take in the amount the user enters as their party "amount"
+     */
     public void partyTotal(int partyTotal) {
         Register.partyTotal = partyTotal;
         int i = 0;
@@ -95,6 +138,11 @@ public class Register implements Customer {
             i++;
             }
         }
+
+    /**
+     *
+     * @return return via Queue FIFO data structure the name of the customer and then remove with .poll to advance the line
+     */
     public String handleCustomer()
     {
         if (!orderOfCustomers.isEmpty()) {
@@ -105,6 +153,11 @@ public class Register implements Customer {
             return "";
         }
     }
+
+    /**
+     *
+     * @return get the party total (how many customers are there in the party)
+     */
     public int getPartyTotal() {
         return partyTotal;
     }

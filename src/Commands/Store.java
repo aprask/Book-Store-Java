@@ -104,6 +104,10 @@ public class Store {
         }
     }
 
+    /**
+     *
+     * @param ID take in an ID to check if the user has purchased an item
+     */
     public void userBank(int ID) {
             if (this.register.enter.purchaseItem(ID)) {
                 String customerName = this.register.handleCustomer();
@@ -151,9 +155,19 @@ public class Store {
                 }
             }
         }
+
+    /**
+     *
+     * @return ID tracker
+     */
     public static int getItemIDTracker() {
         return itemIDTracker;
     }
+
+    /**
+     *
+     * @param changedVal change the value of the ID tracker
+     */
     public static void setItemIDTracker(int changedVal) {
         Store.itemIDTracker = changedVal;
     }
@@ -172,26 +186,48 @@ public class Store {
         // source: https://www.asciiart.eu/books/books
     }
 
+    /**
+     *
+     * @return return the DVD's existing purchased ID
+     */
     public ArrayList<Integer> getDvdIDHistory() {
         return dvdIDHistory;
     }
 
+    /**
+     *
+     * @param dvdIDHistory sets the list to hold the previously purchased DVD ID
+     */
     public void setDvdIDHistory(ArrayList<Integer> dvdIDHistory) {
         this.dvdIDHistory = dvdIDHistory;
     }
-
+    /**
+     *
+     * @return return the CD's existing purchased ID
+     */
     public ArrayList<Integer> getCdIDHistory() {
         return cdIDHistory;
     }
 
+    /**
+     *
+     * @param cdIDHistory sets the list to hold the previously purchased CD ID
+     */
     public void setCdIDHistory(ArrayList<Integer> cdIDHistory) {
         this.cdIDHistory = cdIDHistory;
     }
-
+    /**
+     *
+     * @return return the Book's existing purchased ID
+     */
     public ArrayList<Integer> getBookIDHistory() {
         return bookIDHistory;
     }
 
+    /**
+     *
+     * @param bookIDHistory sets the list to hold the previously purchased book ID
+     */
     public void setBookIDHistory(ArrayList<Integer> bookIDHistory) {
         this.bookIDHistory = bookIDHistory;
     }

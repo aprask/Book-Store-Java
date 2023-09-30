@@ -14,6 +14,12 @@ public class Upgrade implements Command
     {
         
     }
+
+    /**
+     *
+     * @param client takes in an instance of the Client.java class
+     * @param name takes in a name
+     */
     public Upgrade(Client client, String name)
     {
         this.client = client;
