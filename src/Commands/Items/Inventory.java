@@ -9,6 +9,7 @@
         {
             initializeItems();
         }
+
         public void initializeItems()
         {
             Book narnia = new Book("Narnia", 15.99, 300, 0,true);
@@ -45,6 +46,10 @@
             dvds[4] = theSopranos;
         }
 
+        /**
+         *
+         * @param remove remove CD via item ID (index)
+         */
         public void removeCD(int remove)
         {
             CD oldCD = new CD("SOLD OUT",false);
@@ -57,6 +62,10 @@
             }
         }
 
+        /**
+         *
+         * @param remove remove DVD via item ID (index)
+         */
         public void removeDVD(int remove)
         {
             DVD oldDVD = new DVD("SOLD OUT",false);
@@ -68,7 +77,10 @@
                 }
             }
         }
-
+        /**
+         *
+         * @param remove remove Book via item ID (index)
+         */
         public void removeBook(int remove)
         {
             Book oldBook = new Book("SOLD OUT",false);
@@ -126,6 +138,11 @@
             System.out.println("******************************************************************");
             System.out.println();
         }
+
+        /**
+         *
+         * @return menu of items used in Store.java
+         */
         @Override
         public String toString() {
             int var = getSelectionID();
@@ -168,20 +185,46 @@
             }
             else return null;
         }
+
+        /**
+         *
+         * @return return the ID selected
+         */
         public int getSelectionID() {
             return selectionID;
         }
+
+        /**
+         *
+         * @param selectionID set the selection ID
+         */
         public void setSelectionID(int selectionID) {
             Inventory.selectionID = selectionID;
         }
+
+        /**
+         *
+         * @param itemID collect the dvd's ID
+         * @return return dvd's price
+         */
         public double getDVDPrice(int itemID)
         {
             return dvds[itemID].getItemPrice();
         }
+        /**
+         *
+         * @param itemID collect the cd's ID
+         * @return return cd's price
+         */
         public double getCDPrice(int itemID)
         {
             return cds[itemID].getItemPrice();
         }
+        /**
+         *
+         * @param itemID collect the book's ID
+         * @return return book's price
+         */
         public double getBookPrice(int itemID)
         {
             return books[itemID].getItemPrice();
