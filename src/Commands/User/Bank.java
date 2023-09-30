@@ -1,57 +1,48 @@
 package Commands.User;
-
 import Commands.EnterStore;
 import Commands.Register;
+import java.util.ArrayList;
 
 public class Bank
 {
-    Register register = new Register();
-    Client userClient;
-    EnterStore enterStore;
-    protected final int MAX_CLIENTS = EnterStore.clients.size();
-    protected int[] banks = new int[MAX_CLIENTS];
+    public Register register = new Register();
+    public Client userClient;
+    public EnterStore enterStore;
+    protected final ArrayList<Integer> banks = new ArrayList<>();
     public Bank(EnterStore enterStore, Client userClient)
     {
+        while(banks.size() <= userClient.getID())
+        {
+            banks.add(0);
+        }
         this.userClient = userClient;
         this.enterStore = enterStore;
-        initializeAccounts(userClient);
+        initializeAccounts();
     }
-    public void initializeAccounts(Client client)
+    public void initializeAccounts()
     {
-        banks[client.getID()] = 1000;
-    }
-    @Override
-    public String toString() {
-        return
-            this.userClient.getName() + "'s Bank Information:\n" +
-            "Payment Type: " + this.userClient.getPaymentType() +
-            "Balance: " + banks[this.userClient.getID()];
+        banks.add(userClient.getID(),1000);
     }
     public void deductFromBank(double payment)
     {
+        int ID = this.userClient.getID();
         if(this.register.proceedWithOrder())
         {
-            double newBankTotal = banks[userClient.getID()] - payment;
+            double newBankTotal = banks.get(ID) - payment;
             if(newBankTotal < 0)
             {
                 System.out.println("Invalid Payment");
             }
             else if(newBankTotal > 0)
             {
-                System.out.println("For Customer: " + userClient.getName());
-                System.out.println("New Balance: $" + newBankTotal);
+                System.out.println("****************************************************************************");
+                System.out.println("Your New Bank Balance: " + newBankTotal);
+                System.out.println("****************************************************************************");
             }
             else {
                 System.out.println("Something was incorrect with your input");
             }
         }
 
-    }
-    public int[] getBanks() {
-        return banks;
-    }
-
-    public void setBanks(int[] banks) {
-        this.banks = banks;
     }
 }

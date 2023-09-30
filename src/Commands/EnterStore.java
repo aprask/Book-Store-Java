@@ -6,6 +6,7 @@ public class EnterStore implements Command {
     private static Client client;
     public static ArrayList<Client> clients;
     public static ArrayList<String> customerNames = new ArrayList<>();
+    public ArrayList<Double> customerPayments = new ArrayList<>();
     public EnterStore(Client client)
     {
         EnterStore.client = client;
@@ -22,17 +23,6 @@ public class EnterStore implements Command {
             customerNames.add(client.getName());
         }
         return customerNames;
-    }
-    public boolean whoPurchased(String name)
-    {
-        for(int i = 0; i < this.getClients().size(); i++)
-        {
-            if(client.getName().equalsIgnoreCase(name))
-            {
-                return true;
-            }
-        }
-        return false;
     }
     public boolean purchaseItem(int ID)
     {
@@ -57,5 +47,19 @@ public class EnterStore implements Command {
 
     public void setClients(ArrayList<Client> clients) {
         EnterStore.clients = clients;
+    }
+
+    public ArrayList<Double> getCustomerPayments() {
+        return customerPayments;
+    }
+    public void setCustomerPayments(ArrayList<Double> customerPayments) {
+        this.customerPayments = customerPayments;
+    }
+
+    public static ArrayList<String> getCustomerNames() {
+        return customerNames;
+    }
+    public static void setCustomerNames(ArrayList<String> customerNames) {
+        EnterStore.customerNames = customerNames;
     }
 }

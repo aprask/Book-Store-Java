@@ -2,58 +2,39 @@ package Commands.User;
 
 import Commands.Register;
 import java.util.*;
-public class Client implements CustomerDetails {
+public class Client {
     private String name;
     private static int ID = 0;
     private boolean orderStatus;
     private boolean premiumMember;
-    static Scanner scan = new Scanner(System.in);
+    public static Scanner scan = new Scanner(System.in);
     private String paymentType;
     private static final Register register = new Register();
     public Client()
     {
 
     }
+    public Client(String name)
+    {
+        this.name = name;
+    }
+    public Client(String name, boolean membershipType)
+    {
+        this.name = name;
+        this.premiumMember = membershipType;
+    }
+
     public Client(String name, boolean membershipType, String paymentType)
     {
         this.name = name;
-        ID = ID++;
+        ID++;
         this.orderStatus = register.isOrderDone(true);
         this.premiumMember = membershipType;
         this.paymentType = paymentType;
     }
-    @Override
-    public String returnName() {
-        return this.name;
-    }
-
-    @Override
-    public int returnID() {
-        return 0;
-    }
-
-    @Override
-    public boolean orderStatus() {
-        return false;
-    }
-
-    @Override
-    public String membershipType() {
-        return null;
-    }
-
-    @Override
-    public int nextMonthlyBill() {
-        return 0;
-    }
-
     public int getID() {
         return ID;
     }
-    public void setID(int ID) {
-        Client.ID = ID;
-    }
-
     public String getName() {
         return this.name;
     }
@@ -72,35 +53,14 @@ public class Client implements CustomerDetails {
             return "Member Type: Standard";
         }
     }
-    public void identifyUser()
-    {
-        System.out.println("Name: " + getName());
-        System.out.println("Payment Type: " + getPaymentType());
-        System.out.println("Membership Type: " + displayMembershipDetails());
-        System.out.println("User ID Number: " + getID());
-    }
-    public boolean isOrderStatus() {
-        return orderStatus;
-    }
-
-    public void setOrderStatus(boolean orderStatus) {
-        this.orderStatus = orderStatus;
-    }
-
     public String getPaymentType() {
         return paymentType;
     }
-
-    public void setPaymentType(String paymentType) {
-        this.paymentType = paymentType;
-    }
-
-    public boolean isPremiumMember() {
-        return premiumMember;
-    }
-
     public void setPremiumMember(boolean premiumMember) {
         this.premiumMember = premiumMember;
+    }
+    public void setOrderStatus(boolean orderStatus) {
+        this.orderStatus = orderStatus;
     }
     public void membershipDueDate()
     {

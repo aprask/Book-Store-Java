@@ -1,50 +1,48 @@
 package Commands.Items;
 
 public class Book {
-    private String itemName;
+    private final String itemName;
     private double itemPrice;
     private int pages;
-    private int ID;
-    public Book(String itemName, double itemPrice, int pages, int ID) {
+    private int bookID;
+    private boolean status;
+    public Book(String itemName, boolean status)
+    {
+        this.itemName = itemName;
+        this.status = status;
+    }
+    public Book(String itemName, double itemPrice, int pages, int bookID, boolean status) {
         this.itemName = itemName;
         this.itemPrice = itemPrice;
         this.pages = pages;
-        this.ID = ID;
+        this.bookID = bookID;
+        this.status = status;
     }
 
     public String getItemName() {
         return itemName;
     }
 
-    public void setItemName(String itemName) {
-        this.itemName = itemName;
-    }
-
     public double getItemPrice() {
         return itemPrice;
     }
-
-    public void setItemPrice(double itemPrice) {
-        this.itemPrice = itemPrice;
-    }
-
     public int getPages() {
         return pages;
-    }
-
-    public void setPages(int pages) {
-        this.pages = pages;
     }
     @Override
     public String toString() {
         return "Name: " + getItemName() + "\nPrice: " + getItemPrice() + "\nPage Count: " + getPages();
     }
 
-    public int getID() {
-        return ID;
+    public int getBookID() {
+        return bookID;
     }
 
-    public void setID(int ID) {
-        this.ID = ID;
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
     }
 }

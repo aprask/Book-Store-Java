@@ -1,61 +1,53 @@
     package Commands.Items;
-
-    import Commands.Register;
-
     public class Inventory {
         private static final int MAX_ITEMS = 5;
-        private static Book[] books = new Book[MAX_ITEMS];
-        private static CD[] cds = new CD[MAX_ITEMS];
-        private static DVD[] dvds = new DVD[MAX_ITEMS];
-        private int numOfBooks = books.length - 1;
-        private int numOfCDs = cds.length - 1;
-        private int numOfDVDs = dvds.length - 1;
+        private static final Book[] books = new Book[MAX_ITEMS];
+        private static final CD[] cds = new CD[MAX_ITEMS];
+        private static final DVD[] dvds = new DVD[MAX_ITEMS];
         protected static int selectionID;
-        private final Register register = new Register();
-
         public Inventory()
         {
             initializeItems();
         }
         public void initializeItems()
         {
-            Book theHobbit = new Book("The Hobbit",1005,100,0);
-            books[0] = theHobbit;
-            Book theLordOfTheRings = new Book("The Lord of the Rings", 5.00,1000,1);
+            Book narnia = new Book("Narnia", 15.99, 300, 0,true);
+            books[0] = narnia;
+            Book theLordOfTheRings = new Book("The Lord of the Rings", 5.00,1000,1,true);
             books[1] = theLordOfTheRings;
-            Book animalFarm = new Book("Animal Farm", 5.00,250,2);
+            Book animalFarm = new Book("Animal Farm", 5.00,250,2,true);
             books[2] = animalFarm;
-            Book theIliad = new Book("The Iliad", 40.25, 8000,3);
+            Book theIliad = new Book("The Iliad", 40.25, 8000,3,true);
             books[3] = theIliad;
-            Book nineteenEightyFour = new Book("1984",10.50,95,4);
+            Book nineteenEightyFour = new Book("1984",10.50,95,4,true);
             books[4] = nineteenEightyFour;
 
-            CD thriller = new CD("Thriller", 8.95, 250,0);
+            CD thriller = new CD("Thriller", 8.95, 250,0,true);
             cds[0] = thriller;
-            CD hotelCalifornia = new CD("Hotel California",6.95, 100,1);
+            CD hotelCalifornia = new CD("Hotel California",6.95, 100,1,true);
             cds[1] = hotelCalifornia;
-            CD backInBlack = new CD("Back in Black", 5.50,150,2);
+            CD backInBlack = new CD("Back in Black", 5.50,150,2,true);
             cds[2] = backInBlack;
-            CD thePlanets = new CD("The Planets", 150.75, 5000,3);
+            CD thePlanets = new CD("The Planets", 150.75, 5000,3,true);
             cds[3] = thePlanets;
-            CD rideOfTheValkyries = new CD("Ride of the Valkyries", 250.25, 250,4);
+            CD rideOfTheValkyries = new CD("Ride of the Valkyries", 250.25, 250,4,true);
             cds[4] = rideOfTheValkyries;
 
-            DVD starWars = new DVD("Star Wars", 9.15,600,0);
+            DVD starWars = new DVD("Star Wars", 9.15,600,0,true);
             dvds[0] = starWars;
-            DVD theTerminator = new DVD("The Terminator", 10.55, 550,1);
+            DVD theTerminator = new DVD("The Terminator", 10.55, 550,1,true);
             dvds[1] = theTerminator;
-            DVD starTrek = new DVD("Star Trek", 10.75, 1000,2);
+            DVD starTrek = new DVD("Star Trek", 10.75, 1000,2,true);
             dvds[2] = starTrek;
-            DVD theGodfather = new DVD("The Godfather", 25.25, 1025,3);
+            DVD theGodfather = new DVD("The Godfather", 25.25, 1025,3,true);
             dvds[3] = theGodfather;
-            DVD theSopranos = new DVD("The Sopranos", 12.55, 1202,4);
+            DVD theSopranos = new DVD("The Sopranos", 12.55, 1202,4,true);
             dvds[4] = theSopranos;
         }
 
         public void removeCD(int remove)
         {
-            CD oldCD = new CD("SOLD OUT",-99,-99,-99);
+            CD oldCD = new CD("SOLD OUT",false);
             for(int i = 0; i < cds.length; i++)
             {
                 if(cds[i] == cds[remove])
@@ -67,7 +59,7 @@
 
         public void removeDVD(int remove)
         {
-            DVD oldDVD = new DVD("SOLD OUT",-99,-99,-99);
+            DVD oldDVD = new DVD("SOLD OUT",false);
             for(int i = 0; i < dvds.length; i++)
             {
                 if(dvds[i] == dvds[remove])
@@ -79,7 +71,7 @@
 
         public void removeBook(int remove)
         {
-            Book oldBook = new Book("SOLD OUT",-99,-99,-99);
+            Book oldBook = new Book("SOLD OUT",false);
             for(int i = 0; i < books.length; i++)
             {
                 if(books[i] == books[remove])
@@ -89,27 +81,6 @@
             }
         }
 
-        public static CD[] getCds() {
-            return cds;
-        }
-        public static Book[] getBooks() {
-            return books;
-        }
-        public static DVD[] getDvds() {
-            return dvds;
-        }
-
-        public static void setBooks(Book[] books) {
-            Inventory.books = books;
-        }
-
-        public static void setCds(CD[] cds) {
-            Inventory.cds = cds;
-        }
-
-        public static void setDvds(DVD[] dvds) {
-            Inventory.dvds = dvds;
-        }
         public void availableBooks()
         {
             System.out.println("******************************************************************");
@@ -161,72 +132,45 @@
             if(var == 1)
             {
                 return
-                        books[0].getItemName() + ": " + books[0].getID() +
+                        books[1].getItemName() + ": " + books[1].getBookID() +
                                 "\n" +
-                        books[1].getItemName() + ": " + books[1].getID() +
+                        books[2].getItemName() + ": " + books[2].getBookID() +
                                 "\n" +
-                        books[2].getItemName() + ": " + books[2].getID() +
+                        books[3].getItemName() + ": " + books[3].getBookID() +
                                 "\n" +
-                        books[3].getItemName() + ": " + books[3].getID() +
-                                "\n" +
-                        books[4].getItemName() + ": " + books[4].getID();
+                        books[4].getItemName() + ": " + books[4].getBookID();
             }
             else if(var == 2)
             {
                return
-                       cds[0].getItemName() + ": " + cds[0].getID() +
+                       cds[0].getItemName() + ": " + cds[0].getCdID() +
                                "\n" +
-                       cds[1].getItemName() + ": " + cds[1].getID() +
+                       cds[1].getItemName() + ": " + cds[1].getCdID() +
                                "\n" +
-                       cds[2].getItemName() + ": " + cds[2].getID() +
+                       cds[2].getItemName() + ": " + cds[2].getCdID() +
                                "\n" +
-                       cds[3].getItemName() + ": " + cds[3].getID() +
+                       cds[3].getItemName() + ": " + cds[3].getCdID() +
                                "\n" +
-                       cds[4].getItemName() + ": " + cds[4].getID();
+                       cds[4].getItemName() + ": " + cds[4].getCdID();
             }
             else if(var == 3)
             {
                 return
-                        dvds[0].getItemName() + ": " + dvds[0].getID() +
+                        dvds[0].getItemName() + ": " + dvds[0].getDvdID() +
                                 "\n" +
-                        dvds[1].getItemName() + ": " + dvds[1].getID() +
+                        dvds[1].getItemName() + ": " + dvds[1].getDvdID() +
                                 "\n" +
-                        dvds[2].getItemName() + ": " + dvds[2].getID() +
+                        dvds[2].getItemName() + ": " + dvds[2].getDvdID() +
                                 "\n" +
-                        dvds[3].getItemName() + ": " + dvds[3].getID() +
+                        dvds[3].getItemName() + ": " + dvds[3].getDvdID() +
                                 "\n" +
-                        dvds[4].getItemName() + ": " + dvds[4].getID();
+                        dvds[4].getItemName() + ": " + dvds[4].getDvdID();
             }
             else return null;
         }
-
-        public int getNumOfBooks() {
-            return numOfBooks;
-        }
-
-        public void setNumOfBooks(int numOfBooks) {
-            this.numOfBooks = numOfBooks;
-        }
-
-        public int getNumOfCDs() {
-            return numOfCDs;
-        }
-
-        public void setNumOfCDs(int numOfCDs) {
-            this.numOfCDs = numOfCDs;
-        }
-        public int getNumOfDVDs() {
-            return numOfDVDs;
-        }
-
-        public void setNumOfDVDs(int numOfDVDs) {
-            this.numOfDVDs = numOfDVDs;
-        }
-
         public int getSelectionID() {
             return selectionID;
         }
-
         public void setSelectionID(int selectionID) {
             Inventory.selectionID = selectionID;
         }
@@ -242,5 +186,6 @@
         {
             return books[itemID].getItemPrice();
         }
+
 
     }

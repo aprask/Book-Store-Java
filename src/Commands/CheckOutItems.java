@@ -2,7 +2,7 @@ package Commands;
 
 public class CheckOutItems implements Command
 {
-    Register register;
+    public Register register;
     public CheckOutItems(Register newOrder)
     {
         this.register = newOrder;

@@ -1,30 +1,41 @@
 package Commands;
 import Commands.Items.Inventory;
-import Commands.User.Client;
-
 import java.util.*;
 public class Store {
     private final Inventory inventory = new Inventory();
-    static int trackOrderAmount = 1;
+    public static int trackOrderAmount = 1;
     private final Register register = new Register();
     private static final Scanner scan = new Scanner(System.in);
-    private static int var;
-
-    public static int getVar() {
-        return var;
-    }
-
-    public static void setVar(int var) {
-        Store.var = var;
-    }
-
-    public void greetingMessage() {
-        System.out.println("Welcome to the store!");
-        System.out.println("How many members are in your party? ");
-        int partyTotal = scan.nextInt();
-        this.register.partyTotal(partyTotal);
+    private static int itemIDTracker;
+    private ArrayList<Integer> dvdIDHistory = new ArrayList<>();
+    private ArrayList<Integer> cdIDHistory = new ArrayList<>();
+    private ArrayList<Integer> bookIDHistory = new ArrayList<>();
+    public void openStore() {
+        bookLogo();
+        System.out.println("Welcome to the book store!");
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        boolean registration = true;
+        while (registration)
+        {
+            System.out.println("How many members are in your party? ");
+            int partyTotal;
+            try
+            {
+                partyTotal = scan.nextInt();
+                this.register.partyTotal(partyTotal);
+                registration = false;
+            }
+            catch (InputMismatchException e)
+            {
+                System.out.println("ERROR, enter a number");
+                scan.next();
+            }
+        }
         handleUser();
-
     }
 
     public void menu() {
@@ -32,38 +43,52 @@ public class Store {
             case 1 -> {
                 System.out.println("Which Book? Select by ID ");
                 System.out.println(inventory);
-                int selectedID = scan.nextInt();
-                if (selectedID < 5 && selectedID > 0) {
-                    this.register.proceedWithOrder();
-                    double amountSpent = this.inventory.getBookPrice(selectedID);
-                    this.register.handleBankInteraction(amountSpent, this.register.enter.getClient());
-                    this.inventory.removeBook(selectedID);
+                int selectedBookID = scan.nextInt();
+                if(!this.bookIDHistory.contains(selectedBookID))
+                {
+                    this.bookIDHistory.add(selectedBookID);
                 }
-                break;
+                else break;
+                this.bookIDHistory.add(selectedBookID);
+                if (selectedBookID < 5 && selectedBookID > 0) {
+                    this.register.proceedWithOrder();
+                    double amountSpent = this.inventory.getBookPrice(selectedBookID);
+                    this.register.handleBankInteraction(amountSpent, this.register.enter.getClient());
+                    this.inventory.removeBook(selectedBookID);
+                }
             }
             case 2 -> {
                 System.out.println("Which CD? Select by ID ");
                 System.out.println(inventory);
-                int selectedID = scan.nextInt();
-                if (selectedID < 5 && selectedID > 0) {
-                    this.register.proceedWithOrder();
-                    double amountSpent = this.inventory.getCDPrice(selectedID);
-                    this.register.handleBankInteraction(amountSpent, this.register.enter.getClient());
-                    this.inventory.removeCD(selectedID);
+                int selectedCDID = scan.nextInt();
+                if(!this.cdIDHistory.contains(selectedCDID))
+                {
+                    this.cdIDHistory.add(selectedCDID);
                 }
-                break;
+                else break;
+                this.cdIDHistory.add(selectedCDID);
+                if (selectedCDID < 5 && selectedCDID > 0) {
+                    this.register.proceedWithOrder();
+                    double amountSpent = this.inventory.getCDPrice(selectedCDID);
+                    this.register.handleBankInteraction(amountSpent, this.register.enter.getClient());
+                    this.inventory.removeCD(selectedCDID);
+                }
             }
             case 3 -> {
                 System.out.println("Which DVD? Select by ID ");
                 System.out.println(inventory);
-                int selectedID = scan.nextInt();
-                if (selectedID < 5 && selectedID > 0) {
-                    this.register.proceedWithOrder();
-                    double amountSpent = this.inventory.getDVDPrice(selectedID);
-                    this.register.handleBankInteraction(amountSpent, this.register.enter.getClient());
-                    this.inventory.removeDVD(selectedID);
+                int selectedDVDID = scan.nextInt();
+                if(!this.dvdIDHistory.contains(selectedDVDID))
+                {
+                    this.dvdIDHistory.add(selectedDVDID);
                 }
-                break;
+                else break;
+                if (selectedDVDID < 5 && selectedDVDID > 0) {
+                    this.register.proceedWithOrder();
+                    double amountSpent = this.inventory.getDVDPrice(selectedDVDID);
+                    this.register.handleBankInteraction(amountSpent, this.register.enter.getClient());
+                    this.inventory.removeDVD(selectedDVDID);
+                }
             }
             default -> System.out.println("Error");
         }
@@ -80,73 +105,94 @@ public class Store {
     }
 
     public void userBank(int ID) {
-        do {
             if (this.register.enter.purchaseItem(ID)) {
                 String customerName = this.register.handleCustomer();
-                // TODO: Fix perpetual loop
-                if(customerName == null)
-                {
-                    messageToCatchDuplicate();
-                    CheckOutItems checkOut = new CheckOutItems(register);
-                    checkOut.execute();
-                    break;
+                if (customerName.isEmpty()) {
+                    return;
                 }
-                System.out.println("\n" + customerName + "'s order:");
+                System.out.println(customerName + "'s order:");
                 try {
                     Thread.sleep(2000);
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }
-                System.out.println("Would you like a CD, DVD, or a Book? ");
-                var = this.register.createItems(this.inventory);
-                this.inventory.setSelectionID(var);
+                while (true) {
+                    System.out.println("Would you like a CD, DVD, or a Book? ");
+                    itemIDTracker = this.register.createItems(this.inventory);
+                    this.inventory.setSelectionID(itemIDTracker);
                     menu();
-                    if (scan.hasNextLine()) {
-                        System.out.println("\nWould you like to add another item to your cart? Type \"1\": ");
-                        if (this.register.getPartyTotal() > 1) {
-                            System.out.println("Or would you like to move on to the next customer in your party? or \"2\"");
+
+                    System.out.println("\nWould you like to add another item to your cart? Type \"1\": ");
+                    if (this.register.getPartyTotal() > 1) {
+                        System.out.println("Or would you like to move on to the next customer in your party? or \"2\"");
+                    }
+                    if (trackOrderAmount == this.register.getPartyTotal()) {
+                        System.out.println("Or would you like to checkout? Type \"-1\"");
+                    }
+                    String cartChoice = scan.next();
+
+                    if (cartChoice.equalsIgnoreCase("-1")) {
+                        System.out.println("Would you like a refund? Type \"yes\" or \"no\"");
+                        String refundOption = scan.next();
+                        if (refundOption.equalsIgnoreCase("yes")) {
+                            RefundItems refundItems = new RefundItems(register);
+                            refundItems.execute();
+                        } else {
+                            CheckOutItems checkOut = new CheckOutItems(register);
+                            checkOut.execute();
                         }
-                        if (trackOrderAmount == this.register.getPartyTotal()) {
-                            System.out.println("Or would you like to checkout? Type \"-1\"");
-                        }
-                        String cartChoice = scan.next();
-                        if (cartChoice.equalsIgnoreCase("-1")) {
-                            System.out.println("Would you like a refund? Type \"yes\" or \"no\"");
-                            String refundOption = scan.next();
-                            if (refundOption.equalsIgnoreCase("yes")) {
-                                RefundItems refundItems = new RefundItems(register);
-                                refundItems.execute();
-                                break;
-                            } else {
-                                CheckOutItems checkOut = new CheckOutItems(register);
-                                checkOut.execute();
-                                break;
-                            }
-                        } else if (cartChoice.equalsIgnoreCase("2")) {
-                            trackOrderAmount++;
-                            handleUser();
-                        } else if (cartChoice.equalsIgnoreCase("1")) {
-                            var = this.register.createItems(this.inventory);
-                            this.inventory.setSelectionID(var);
-                        }
+                        break;
+                    } else if (cartChoice.equalsIgnoreCase("2")) {
+                        trackOrderAmount++;
+                        break;
+                    } else if (!cartChoice.equalsIgnoreCase("1")) {
+                        break;
                     }
                 }
-            } while (true);
-        }
-        public void messageToCatchDuplicate()
-        {
-            System.out.println("What are you doing?");
-            try {
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
             }
-            System.out.println("Your party limit is " + this.register.getPartyTotal());
-            try {
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-            System.out.println("Time to complete your order...");
         }
+    public static int getItemIDTracker() {
+        return itemIDTracker;
     }
+    public static void setItemIDTracker(int changedVal) {
+        Store.itemIDTracker = changedVal;
+    }
+    public void bookLogo()
+    {
+        System.out.println("         ,..........   ..........,");
+        System.out.println("     ,..,'          '.'          ',..,");
+        System.out.println("    ,' ,'            :            ', ',");
+        System.out.println("   ,' ,'             :             ', ',");
+        System.out.println("  ,' ,'              :              ', ',");
+        System.out.println("  ,' ,'              :              ', ',");
+        System.out.println(" ,' ,'............., : ,.............', ',");
+        System.out.println(",'  '............   '.'   ............'  ',");
+        System.out.println(" '''''''''''''''''';''';''''''''''''''''''");
+        System.out.println("                    '''");
+        // source: https://www.asciiart.eu/books/books
+    }
+
+    public ArrayList<Integer> getDvdIDHistory() {
+        return dvdIDHistory;
+    }
+
+    public void setDvdIDHistory(ArrayList<Integer> dvdIDHistory) {
+        this.dvdIDHistory = dvdIDHistory;
+    }
+
+    public ArrayList<Integer> getCdIDHistory() {
+        return cdIDHistory;
+    }
+
+    public void setCdIDHistory(ArrayList<Integer> cdIDHistory) {
+        this.cdIDHistory = cdIDHistory;
+    }
+
+    public ArrayList<Integer> getBookIDHistory() {
+        return bookIDHistory;
+    }
+
+    public void setBookIDHistory(ArrayList<Integer> bookIDHistory) {
+        this.bookIDHistory = bookIDHistory;
+    }
+}

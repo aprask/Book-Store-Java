@@ -1,50 +1,48 @@
 package Commands.Items;
 
 public class CD {
-    private String itemName;
+    private final String itemName;
     private double itemPrice;
     private double cdLength;
-    private int ID;
-    public CD(String itemName, double itemPrice, double cdLength, int ID) {
+    private int cdID;
+    private boolean status;
+    public CD(String itemName, boolean status)
+    {
+        this.itemName = itemName;
+        this.status = status;
+    }
+    public CD(String itemName, double itemPrice, double cdLength, int cdID, boolean status) {
         this.itemName = itemName;
         this.itemPrice = itemPrice;
         this.cdLength = cdLength;
-        this.ID = ID;
+        this.cdID = cdID;
+        this.status = status;
     }
 
     public String getItemName() {
         return itemName;
     }
 
-    public void setItemName(String itemName) {
-        this.itemName = itemName;
-    }
-
     public double getItemPrice() {
         return itemPrice;
     }
-
-    public void setItemPrice(double itemPrice) {
-        this.itemPrice = itemPrice;
-    }
-
     public double getCdLength() {
         return cdLength;
-    }
-
-    public void setCdLength(double cdLength) {
-        this.cdLength = cdLength;
     }
     @Override
     public String toString() {
         return "Name: " + getItemName() + "\nPrice: " + getItemPrice() + "\nCD Length: " + getCdLength();
      }
 
-    public int getID() {
-        return ID;
+    public int getCdID() {
+        return cdID;
     }
 
-    public void setID(int ID) {
-        this.ID = ID;
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
     }
 }
