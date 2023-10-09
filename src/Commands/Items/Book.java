@@ -6,7 +6,6 @@ public class Book {
     private int pages;
     private int bookID;
     private boolean status;
-
     /**
      *
      * @param itemName the item's name
@@ -17,7 +16,6 @@ public class Book {
         this.itemName = itemName;
         this.status = status;
     }
-
     /**
      *
      * @param itemName the item's name
@@ -57,7 +55,6 @@ public class Book {
     public int getPages() {
         return pages;
     }
-
     /**
      *
      * @return the details of the item
@@ -66,7 +63,6 @@ public class Book {
     public String toString() {
         return "Name: " + getItemName() + "\nPrice: " + getItemPrice() + "\nPage Count: " + getPages();
     }
-
     /**
      *
      * @return return the book's ID
@@ -74,7 +70,6 @@ public class Book {
     public int getBookID() {
         return bookID;
     }
-
     /**
      *
      * @return return the book's status
@@ -82,7 +77,6 @@ public class Book {
     public boolean isStatus() {
         return status;
     }
-
     /**
      *
      * @param status set the book's status

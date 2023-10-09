@@ -1,5 +1,4 @@
 package Commands.User;
-
 import Commands.Register;
 import java.util.*;
 public class Client {
