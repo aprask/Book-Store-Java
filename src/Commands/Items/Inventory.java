@@ -50,6 +50,7 @@
          *
          * @param remove remove CD via item ID (index)
          */
+
         public void removeCD(int remove)
         {
             CD oldCD = new CD("SOLD OUT",false);
@@ -61,6 +62,7 @@
                 }
             }
         }
+
 
         /**
          *
@@ -115,9 +117,9 @@
             for (CD cd : cds) {
                 if (cd != null) {
                     System.out.println();
-                    System.out.println("Name: " + cd.getItemName());
-                    System.out.println("Price: $" + cd.getItemPrice());
-                    System.out.println("Length in seconds: " + cd.getCdLength());
+                    //System.out.println("Name: " + cd.getItemName());
+                    //System.out.println("Price: $" + cd.getItemPrice());
+                    //System.out.println("Length in seconds: " + cd.getCdLength());
                 }
             }
             System.out.println("******************************************************************");
@@ -170,6 +172,7 @@
                                "\n" +
                        cds[4].getItemName() + ": " + cds[4].getCdID();
             }
+
             else if(var == 3)
             {
                 return
@@ -229,6 +232,4 @@
         {
             return books[itemID].getItemPrice();
         }
-
-
     }

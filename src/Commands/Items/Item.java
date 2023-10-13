@@ -1,21 +1,20 @@
 package Commands.Items;
-
-import java.util.ArrayList;
-
-public abstract class Item
-{
+public abstract class Item {
     private String name;
     private double price;
     private boolean sold;
     private int ID;
-    private ArrayList<Item> itemList = new ArrayList<>();
 
-    private Item(String name, double price, boolean sold, int ID)
-    {
-        this.name = name;
-        this.price = price;
-        this.sold = sold;
-        this.ID = ID;
+    public Item(String itemName, boolean status) {
+        this.name = itemName;
+        this.sold = status;
+    }
+
+    public Item(String itemName, double itemPrice, boolean status, int id) {
+        this.name = itemName;
+        this.price = itemPrice;
+        this.sold = status;
+        this.ID = id;
     }
 
     public String getName() {
@@ -48,13 +47,5 @@ public abstract class Item
 
     public void setID(int ID) {
         this.ID = ID;
-    }
-
-    public ArrayList<Item> getItemList() {
-        return itemList;
-    }
-
-    public void setItemList(ArrayList<Item> itemList) {
-        this.itemList = itemList;
     }
 }

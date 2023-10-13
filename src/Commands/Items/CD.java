@@ -1,12 +1,11 @@
 package Commands.Items;
 
-public class CD {
-    private final String itemName;
+public class CD extends Item {
+    private String itemName;
     private double itemPrice;
     private double cdLength;
     private int cdID;
     private boolean status;
-
     /**
      *
      * @param itemName the item's name
@@ -14,10 +13,13 @@ public class CD {
      */
     public CD(String itemName, boolean status)
     {
-        this.itemName = itemName;
-        this.status = status;
+        super(itemName,status);
     }
 
+    public CD(String itemName, double itemPrice, int cdID, boolean status) {
+        super(itemName,itemPrice,status,cdID);
+        this.cdLength = cdLength;
+    }
     /**
      *
      * @param itemName the item's name
@@ -27,13 +29,9 @@ public class CD {
      * @param status whether it has been sold
      */
     public CD(String itemName, double itemPrice, double cdLength, int cdID, boolean status) {
-        this.itemName = itemName;
-        this.itemPrice = itemPrice;
+        super(itemName,itemPrice,status,cdID);
         this.cdLength = cdLength;
-        this.cdID = cdID;
-        this.status = status;
     }
-
     /**
      *
      * @return return the item's name
@@ -65,7 +63,7 @@ public class CD {
     @Override
     public String toString() {
         return "Name: " + getItemName() + "\nPrice: " + getItemPrice() + "\nCD Length: " + getCdLength();
-     }
+    }
 
     /**
      *
@@ -90,4 +88,5 @@ public class CD {
     public void setStatus(boolean status) {
         this.status = status;
     }
+
 }
